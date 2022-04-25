@@ -1,0 +1,11 @@
+---
+- name: Playbook to run inspec (playbook.yml)
+  hosts: localhost
+  vars_files:
+    - group_vars/all/all.yml
+    - cred.yml
+  tasks:
+    - name: Include run_inspec role
+      include_role:
+        name: run_inspec
+        tasks_from: main.yml

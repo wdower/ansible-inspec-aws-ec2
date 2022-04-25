@@ -1,0 +1,32 @@
+- name: Print hosts
+  debug:
+    msg: "{{ hostvars }}"
+  loop: "{{ groups['test_group'] }}"
+  when: debug == "true"
+
+- name: Run InSpec (inspec_exec.yml)
+  shell: |
+    inspec exec {{ inspec_profile }} \
+    -t ssh://{{ ec2_user }}@{{ item }} -i {{ ssh_keyfile }} \
+    --sudo --input-file {{ input_file }} \
+    --reporter=cli json:./results/inspec-run-{{ item }}.json
+  loop: "{{ groups['test_group'] }}"
+  async: "{{ inspec_wait_time }}"
+  poll: "{{ inspec_poll }}"
+  register: inspec_results
+
+- name: wait for all runs to complete
+  # async_status:
+  #   jid: '{{ inspec_results.ansible_job_id }}'
+
+  register: inspec_finished
+  wait_for:
+    timeout: 180
+  # until: "{{ inspec_results.results | map(attribute='') )}}"
+  # retries: 100
+  # delay: 10
+
+- name: Indicate completion
+  debug:
+    msg: "{{ inspec_results }}"
+#   when: "{{ inspec_finished.finished }}"

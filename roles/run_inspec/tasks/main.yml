@@ -1,0 +1,3 @@
+---
+- name: Run InSpec (run_inspec/main.yml)
+  include_tasks: inspec_exec.yml

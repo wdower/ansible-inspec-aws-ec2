@@ -1,0 +1,9 @@
+---
+inspec_profile: "https://github.com/mitre/redhat-enterprise-linux-7-stig-baseline/archive/master.tar.gz"
+ec2_user: "ec2-user"
+ssh_keyfile: "/Users/wdower/.ssh/aws_ssh.pem"
+input_file: "roles/run_inspec/files/inputs.yml"
+inspec_wait_time: 120
+inspec_poll: 0
+
+debug: "true"
