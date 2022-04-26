@@ -1,5 +1,5 @@
 ---
-- name: Playbook to run inspec (playbook.yml)
+- name: Playbook to run InSpec against an EC2 group
   hosts: localhost
   vars_files:
     - group_vars/all/all.yml

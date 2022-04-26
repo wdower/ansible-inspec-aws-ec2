@@ -1,9 +1,18 @@
 ---
+# inspec_profile can be a URL or a local profile directory
 inspec_profile: "https://github.com/mitre/redhat-enterprise-linux-7-stig-baseline/archive/master.tar.gz"
 ec2_user: "ec2-user"
-ssh_keyfile: "/Users/wdower/.ssh/aws_ssh.pem"
+ssh_keyfile: "~/.ssh/aws_ssh.pem" # put full path to your ec2 ssh key here
 input_file: "roles/run_inspec/files/inputs.yml"
 inspec_wait_time: 120
-inspec_poll: 0
+inspec_poll: 0  # when poll == 0, ansible will not wait for task completion
+                # before moving on to the next task
+                # 
+                # if poll == 0 and the task has a loop set, then all iterations of
+                # the loop will execute at once
 
-debug: "true"
+inspec_wait_async_retries: 30
+inspec_wait_async_delay: 10
+inspec_wait_async_poll: 0
+
+debug: "false"
