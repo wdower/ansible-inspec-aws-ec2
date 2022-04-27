@@ -12,8 +12,8 @@ Before you start, make sure:
 enable_plugins = aws_ec2
 ```
 - You have a group of EC2s in AWS which are:
-    - accessible via an SSH from your CLI
-    - tagged with something unique to target with ansible (ex. 'test_group')
+    - accessible via a single SSH key
+    - tagged with something unique to target with Ansible (ex. 'test_group')
 
 ### aws_ec2 plugin
 
@@ -40,23 +40,6 @@ $> ansible-inventory -i aws_ec2.yml --graph
   |  |--ec2-3-15-31-155.us-east-2.compute.amazonaws.com
   |--@ungrouped:
 ```
-
-### Setting up credentials
-
-You can drop off your AWS credentials into an encrypted yml file using Ansible Vault.
-
-```
-$> ansible-vault create cred.yml
-New Vault password:
-Confirm New Vault password:
-
-$> ansible-vault edit cred.yml 
-Vault password:
-access_key: <key here>                                  
-secret_key: <secret key here>
-```
-
-Make sure that cred.yml is in your .gitignore.
 
 ## Running the role
 

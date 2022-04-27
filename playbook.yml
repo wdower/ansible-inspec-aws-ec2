@@ -3,7 +3,7 @@
   hosts: localhost
   vars_files:
     - group_vars/all/all.yml
-    - cred.yml
+    # - cred.yml
   tasks:
     - name: Include run_inspec role
       include_role:
